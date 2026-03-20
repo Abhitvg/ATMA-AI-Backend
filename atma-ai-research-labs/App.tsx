@@ -15,7 +15,7 @@ import ChatBot from './components/ChatBot';
 import { RoutePath } from './types';
 import { SearchProvider } from './context/SearchContext';
 
-// Component to handle page transitions
+
 const AnimatedRoutes = () => {
   const location = useLocation();
   return (
