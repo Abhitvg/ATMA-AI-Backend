@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATMA AI | Admin Panel</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>ATMA AI</h2>
+                <span>Automation Engine</span>
+            </div>
+            <nav>
+                <button class="nav-btn active" data-tab="inbound">Inbound Proposals</button>
+                <button class="nav-btn" data-tab="outbound">Outbound Sequences</button>
+                <button class="nav-btn" data-tab="content">Content Marketing</button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content-area">
+            <header>
+                <h1 id="page-title">Inbound Proposals</h1>
+                <div class="status-badge">Engine Online</div>
+            </header>
+
+            <div class="card-grid" id="data-container">
+                <!-- Data will be populated here via JS -->
+            </div>
+        </main>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>

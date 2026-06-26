@@ -1,0 +1,50 @@
+version: "3.9"
+services:
+  n8n:
+    image: n8nio/n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=0.0.0.0
+      - N8N_PORT=5678
+      - WEBHOOK_URL=http://localhost:5678/ # Configure this to your public domain when deployed
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+
+  matomo:
+    image: matomo:latest
+    ports:
+      - "8081:80"
+    environment:
+      - MATOMO_DATABASE_HOST=db
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.5
+    environment:
+      - MYSQL_ROOT_PASSWORD=matomo_root
+      - MYSQL_DATABASE=matomo
+      - MYSQL_USER=matomo
+      - MYSQL_PASSWORD=matomo_pass
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  n8n_data:
+  db_data:

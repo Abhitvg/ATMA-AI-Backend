@@ -1,0 +1,23 @@
+{
+  "annotations": { "list": [] },
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Webhook Success Rate",
+      "targets": [
+        { "expr": "sum(rate(http_requests_total{job=\"n8n\",code!~\"5..\"}[5m])) / sum(rate(http_requests_total{job=\"n8n\"}[5m]))", "legendFormat": "Success" }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 }
+    },
+    {
+      "type": "graph",
+      "title": "Unique Visitors (Matomo)",
+      "targets": [
+        { "expr": "sum(increase(matomo_visits_total[1h]))", "legendFormat": "Visitors" }
+      ],
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 }
+    }
+  ],
+  "schemaVersion": 30,
+  "version": 1
+}
