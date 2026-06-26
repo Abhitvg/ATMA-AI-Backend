@@ -38,10 +38,10 @@ services:
   db:
     image: mariadb:10.5
     environment:
-      - MYSQL_ROOT_PASSWORD=matomo_root
+      - MYSQL_ROOT_PASSWORD=${MATOMO_DB_ROOT_PASSWORD}
       - MYSQL_DATABASE=matomo
       - MYSQL_USER=matomo
-      - MYSQL_PASSWORD=matomo_pass
+      - MYSQL_PASSWORD=${MATOMO_DB_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
 

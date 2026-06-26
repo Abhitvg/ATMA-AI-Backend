@@ -1,31 +1,33 @@
 import os
 import sys
+import argparse
 
 # Add the parent directory to the path so we can import the other scripts
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 try:
-    from importlib import import_module
-    scraper = import_module("1_scraper_workflow")
-    demo_gen = import_module("2_demo_generator")
-    outreach = import_module("3_outreach_sequencer")
+    import scraper_workflow as scraper
+    import demo_generator as demo_gen
+    import outreach_sequencer as outreach
 except ImportError as e:
     print(f"Error importing modules: {e}")
     sys.exit(1)
 
 def main():
+    parser = argparse.ArgumentParser(description="ATMA AI - OUTBOUND CAMPAIGN RUNNER")
+    parser.add_argument('--urls', type=str, help="Comma separated target website URLs")
+    args = parser.parse_args()
+
     print("="*50)
     print("🚀 ATMA AI - OUTBOUND CAMPAIGN RUNNER")
     print("="*50)
 
-    # 1. Ask for Target URLs
-    print("\nEnter target website URLs (comma separated):")
-    urls_input = input("> ")
-    if not urls_input.strip():
-        print("No URLs provided. Using defaults for testing.")
+    # 1. Target URLs
+    if not args.urls:
+        print("No URLs provided via --urls. Using defaults for testing.")
         target_urls = ["https://example.com", "https://atma-ai.co.in"]
     else:
-        target_urls = [url.strip() for url in urls_input.split(',')]
+        target_urls = [url.strip() for url in args.urls.split(',')]
 
     # 2. Run Scraper
     print("\n[1/3] Scraping websites and extracting business intelligence...")
